@@ -10,10 +10,13 @@ Samir Rodriguez (ndivinity)|(Divinity Winter, Jeon) <mxjeonsgw@gmail.com>
 
 
 #include "std.hxx"
+#include "macros.h"
 #include "string.cxx"
 
 // Pula mea...
 #include "bits/printf.cxx"
+
+#include "memalloc.cxx"
 
 extern "C" {
 const u8 KStd::ConstructColour(const u8 fg, const u8 bg) {
@@ -91,7 +94,7 @@ const u8 KStd::ScrSetColourU8(const u8 colour) {
     return old_colour;
 }
 
-None KStd::halt(None) {
+__usesAssemblyInl None KStd::halt(None) {
     asm volatile(
         "cli" "\n" // Stops receving any orders
         "hlt" // Halts processor
@@ -107,5 +110,28 @@ None KStd::ScrPrintc(const u8 character) {
         .character = cast(character, u8),
         .colour = TermTrace::colour
     };
+}
+
+const usize MemSet(i8* ptr, const usize arrsz, const usize qua, const i8 with) {
+    if(ptr == null || arrsz <= 0 || qua <= 0 || qua > arrsz) return 0;
+
+    usize i = 0;
+
+    for(i = 0; i <= qua; i++) {
+        ptr[i] = with;
+    }
+
+    return i;
+}
+
+const usize MemSetFrom(i8* ptr, const usize arrsz, const usize from, const usize qua, const i8 with) {
+    if(ptr == null || arrsz <= 0 || from <= 0 ) return 0;
+    if(from > arrsz || qua > arrsz || qua <= 0) return 0;
+
+    usize i = 0;
+
+    for(i = from; i <= qua; i++) ptr[i] = with;
+
+    return i - from;
 }
 }

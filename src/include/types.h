@@ -17,15 +17,15 @@ extern "C" {
     typedef unsigned int u32, uint, udword;
     typedef int i32, idword;
     
-    typedef unsigned long long int u64, ulong, uqword, usize, umax;
-    typedef long long int i64, ilong, iqword, isize, imax;
+    typedef unsigned long long int u64, ulong, uqword, usize, umax, uptr;
+    typedef long long int i64, ilong, iqword, isize, imax, iptr;
 
     typedef float f32;
     typedef double f64;
 
     typedef void* v0, *rawmem;
 
-    typedef enum alisaOS_fakeType_bool {True=1, False=0, Maybe=2} u1, i1, ubool, ibool, ubit, ibit;
+    typedef enum alisaOS_fakeType_bool {True=1, False=0} u1, i1, ubool, ibool, ubit, ibit;
 
     #define None void
     #define null 0

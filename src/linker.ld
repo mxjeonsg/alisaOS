@@ -7,6 +7,7 @@
 ;; Description: no
 */
 ENTRY(uwu)
+OUTPUT(i386)
 
 
 SECTIONS {

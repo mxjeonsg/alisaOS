@@ -9,6 +9,8 @@ Samir Rodriguez (ndivinity)|(Divinity Winter, Jeon) <mxjeonsgw@gmail.com>
 */
 
 #include "../types.h"
+#include "macros.h"
+
 
 extern "C" {
 namespace KStd {
@@ -111,6 +113,27 @@ namespace KStd {
     // This completely aborts the bootloader/kernel
     // In: nothing
     // Out: nothing
-    None halt(None);
+    __usesAssemblyInl None halt(None);
+
+    // This sets `ptr` chunk from zero to `qua`th
+    // with `with`s.
+    // In:
+    // - `i8* ptr` -> The array pointer
+    // - `const usize arrsz` -> The array size
+    // - `const usize qua` -> How much bytes to fill
+    // - `const i8 with` -> Fill with?
+    // Out: `const usize` -> How much got filled
+    const usize MemSet(i8* ptr, const usize arrsz, const usize qua, const i8 with);
+
+    // This sets `ptr` chunk from `from` to `qua`th
+    // with `with`s.
+    // In:
+    // - `i8* ptr` -> The array pointer
+    // - `const usize arrsz` -> The array size
+    // - `const usize from` -> Where to start
+    // - `const usize qua` -> How much bytes to fill
+    // - `const i8 with` -> Fill with?
+    // Out: `const usize` -> How much got filled
+    const usize MemSetFrom(i8* ptr, const usize arrsz, const usize from, const usize qua, const i8 with);
 }
 }
